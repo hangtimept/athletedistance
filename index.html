@@ -736,8 +736,7 @@
       lastTime: 0,
       path: [],
       gravity: { x: 0, y: 0, z: -1 },
-      levelOk: false,
-      autoStopped: false
+      levelOk: false
     };
 
     // Sensitivity thresholds (m/s²)
@@ -863,8 +862,6 @@
       state.path.forEach((p, i) => {
         const px = p.x * scale + offX;
         const py = p.y * scale + offY;
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
       });
       ctx.stroke();
 
@@ -987,16 +984,6 @@
 
       if (dist > state.peakDist) state.peakDist = dist;
 
-      // Auto-stop when movement settles after having moved
-      if (state.peakDist > 0.02 && speed < 0.015 && mag < s.stop && !state.autoStopped) {
-        state.autoStopped = true;
-        setTimeout(() => {
-          if (state.tracking && state.autoStopped) {
-            stopTracking(true);
-          }
-        }, 600);
-      }
-
       // UI update (throttled via rAF)
       updateDisplay(dist, speed);
     }
@@ -1082,14 +1069,13 @@
     trackBtn.addEventListener('click', () => {
       if (!state.calibrated) return;
       if (state.tracking) {
-        stopTracking(false);
+        stopTracking();
       } else {
         // reset kinematics but keep calibration
         state.position = { x: 0, y: 0 };
         state.velocity = { x: 0, y: 0 };
         state.peakDist = 0;
         state.path = [{ x: 0, y: 0 }];
-        state.autoStopped = false;
         state.lastTime = 0;
         state._fax = 0;
         state._fay = 0;
@@ -1102,16 +1088,15 @@
       }
     });
 
-    function stopTracking(auto = false) {
+    function stopTracking() {
       state.tracking = false;
       trackBtn.textContent = 'Start';
-      setStatus('ready', auto ? 'Captured' : 'Ready');
+      setStatus('ready', 'Ready');
       distanceValue.classList.remove('tracking');
-      haptic(auto ? [30, 50, 30] : 20);
+      haptic(20);
 
       if (state.peakDist > 0.005) {
-        showToast(auto ? 'Auto-captured · ' + toDisplay(state.peakDist) + ' ' + unitLabel()
-                       : 'Stopped · ' + toDisplay(state.peakDist) + ' ' + unitLabel());
+        showToast('Stopped · ' + toDisplay(state.peakDist) + ' ' + unitLabel());
       }
     }
 
@@ -1121,7 +1106,6 @@
       state.peakDist = 0;
       state.path = [];
       state.tracking = false;
-      state.autoStopped = false;
       trackBtn.textContent = 'Start';
       if (state.calibrated) setStatus('ready', 'Ready');
       else setStatus('', 'Standby');
