@@ -7,6 +7,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#0a0e17" />
   <title>ReachTrack · Athletic Distance Meter</title>
+
+  <!-- Favicon / Tab Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2322d3ee'/%3E%3Cstop offset='100%25' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0e17'/%3E%3Cpath d='M18 42 L32 14 L46 42' stroke='url(%23g)' stroke-width='5.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='32' cy='46' r='4.5' fill='%2322d3ee'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2322d3ee'/%3E%3Cstop offset='100%25' stop-color='%236366f1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0e17'/%3E%3Cpath d='M18 42 L32 14 L46 42' stroke='url(%23g)' stroke-width='5.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Ccircle cx='32' cy='46' r='4.5' fill='%2322d3ee'/%3E%3C/svg%3E" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -73,26 +78,30 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #22d3ee, #6366f1);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #0a0e17;
+      border: 1px solid rgba(34, 211, 238, 0.25);
       display: grid;
       place-items: center;
-      font-weight: 800;
-      font-size: 14px;
-      color: #0a0e17;
-      box-shadow: 0 0 24px var(--accent-glow);
+      box-shadow: 0 0 28px var(--accent-glow);
+      overflow: hidden;
+    }
+
+    .logo-mark svg {
+      width: 26px;
+      height: 26px;
     }
 
     .logo-text {
       font-weight: 700;
-      font-size: 18px;
-      letter-spacing: -0.02em;
+      font-size: 19px;
+      letter-spacing: -0.03em;
     }
 
     .logo-text span {
@@ -291,14 +300,14 @@
     /* Canvas Path */
     .path-container {
       flex: 1;
-      min-height: 140px;
-      max-height: 220px;
+      min-height: 160px;
+      max-height: 260px;
       background: var(--bg-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       position: relative;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .path-container canvas {
@@ -324,7 +333,7 @@
       display: grid;
       grid-template-columns: 1fr 1.4fr 1fr;
       gap: 12px;
-      padding-bottom: 8px;
+      padding-bottom: calc(20px + var(--safe-bottom));
     }
 
     .btn {
@@ -374,68 +383,6 @@
       background: rgba(248, 113, 113, 0.12);
       color: var(--danger);
       border: 1px solid rgba(248, 113, 113, 0.25);
-    }
-
-    /* History */
-    .history-section {
-      padding: 0 20px calc(20px + var(--safe-bottom));
-    }
-
-    .history-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 12px;
-    }
-
-    .history-title {
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-    }
-
-    .history-clear {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px 8px;
-    }
-
-    .history-list {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
-    }
-
-    .history-list::-webkit-scrollbar { display: none; }
-
-    .history-item {
-      flex-shrink: 0;
-      min-width: 110px;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-    }
-
-    .history-item .h-dist {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .history-item .h-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
     }
 
     /* Overlay / Modal */
@@ -594,18 +541,24 @@
     .gate.hidden { display: none; }
 
     .gate-icon {
-      width: 80px;
-      height: 80px;
+      width: 88px;
+      height: 88px;
       border-radius: 24px;
-      background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(99,102,241,0.2));
+      background: #0a0e17;
+      border: 1px solid rgba(34, 211, 238, 0.3);
       display: grid;
       place-items: center;
       margin-bottom: 28px;
-      font-size: 36px;
+      box-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .gate-icon svg {
+      width: 48px;
+      height: 48px;
     }
 
     .gate h1 {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 700;
       letter-spacing: -0.03em;
       margin-bottom: 12px;
@@ -637,7 +590,18 @@
 <body>
   <!-- Permission Gate -->
   <div class="gate" id="gate">
-    <div class="gate-icon">📐</div>
+    <div class="gate-icon">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22d3ee"/>
+            <stop offset="100%" stop-color="#6366f1"/>
+          </linearGradient>
+        </defs>
+        <path d="M18 42 L32 14 L46 42" stroke="url(#logoGrad)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="32" cy="46" r="4.5" fill="#22d3ee"/>
+      </svg>
+    </div>
     <h1>ReachTrack</h1>
     <p>Precision short-distance measurement using your iPhone’s motion sensors. Ideal for Y-Balance and reach testing.</p>
     <button class="btn btn-primary" id="enableBtn">Enable Motion Sensors</button>
@@ -647,7 +611,18 @@
   <!-- Header -->
   <header class="header">
     <div class="logo">
-      <div class="logo-mark">RT</div>
+      <div class="logo-mark">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoGradHeader" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#22d3ee"/>
+              <stop offset="100%" stop-color="#6366f1"/>
+            </linearGradient>
+          </defs>
+          <path d="M18 42 L32 14 L46 42" stroke="url(#logoGradHeader)" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="32" cy="46" r="4.5" fill="#22d3ee"/>
+        </svg>
+      </div>
       <div class="logo-text">Reach<span>Track</span></div>
     </div>
     <div class="header-actions">
@@ -705,16 +680,6 @@
     </div>
   </main>
 
-  <section class="history-section">
-    <div class="history-header">
-      <span class="history-title">Recent Trials</span>
-      <button class="history-clear" id="clearHistory">Clear</button>
-    </div>
-    <div class="history-list" id="historyList">
-      <!-- populated by JS -->
-    </div>
-  </section>
-
   <!-- Info Modal -->
   <div class="overlay" id="infoOverlay">
     <div class="modal">
@@ -725,7 +690,7 @@
         <li><strong>2</strong> Tap <em>Enable Motion Sensors</em> and allow access when prompted.</li>
         <li><strong>3</strong> Keep the device still and tap <em>Calibrate</em>. Wait for the “Ready” status.</li>
         <li><strong>4</strong> Tap <em>Start</em>, then smoothly push the platform. Distance updates live.</li>
-        <li><strong>5</strong> When movement stops, the peak distance is locked. Tap Reset for the next trial.</li>
+        <li><strong>5</strong> When finished, note the Peak distance, then tap <em>Reset</em> for the next trial.</li>
       </ul>
       <p style="font-size:13px;color:var(--text-muted);">Note: Inertial tracking has inherent drift. Best results on very short distances (&lt; 1 m) with a smooth surface and steady push. Treat readings as comparative rather than absolute laboratory-grade.</p>
       <button class="btn btn-primary" id="closeInfo">Got it</button>
@@ -770,7 +735,6 @@
       peakDist: 0,
       lastTime: 0,
       path: [],
-      history: JSON.parse(localStorage.getItem('reachtrack_history') || '[]'),
       gravity: { x: 0, y: 0, z: -1 },
       levelOk: false,
       autoStopped: false
@@ -798,7 +762,6 @@
     const calibrateBtn = $('calibrateBtn');
     const trackBtn = $('trackBtn');
     const resetBtn = $('resetBtn');
-    const historyList = $('historyList');
     const canvas = $('pathCanvas');
     const ctx = canvas.getContext('2d');
     const toastEl = $('toast');
@@ -1068,8 +1031,8 @@
       if (typeof DeviceMotionEvent !== 'undefined' &&
           typeof DeviceMotionEvent.requestPermission === 'function') {
         DeviceMotionEvent.requestPermission()
-          .then(state => {
-            if (state === 'granted') {
+          .then(permState => {
+            if (permState === 'granted') {
               startListening();
             } else {
               showToast('Motion permission denied');
@@ -1147,15 +1110,6 @@
       haptic(auto ? [30, 50, 30] : 20);
 
       if (state.peakDist > 0.005) {
-        const entry = {
-          dist: state.peakDist,
-          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-          unit: state.unit
-        };
-        state.history.unshift(entry);
-        if (state.history.length > 20) state.history.pop();
-        localStorage.setItem('reachtrack_history', JSON.stringify(state.history));
-        renderHistory();
         showToast(auto ? 'Auto-captured · ' + toDisplay(state.peakDist) + ' ' + unitLabel()
                        : 'Stopped · ' + toDisplay(state.peakDist) + ' ' + unitLabel());
       }
@@ -1177,31 +1131,6 @@
       haptic(8);
     });
 
-    // ========== History ==========
-    function renderHistory() {
-      historyList.innerHTML = '';
-      if (!state.history.length) {
-        historyList.innerHTML = '<div style="color:var(--text-muted);font-size:13px;padding:8px 0">No trials yet</div>';
-        return;
-      }
-      state.history.forEach(h => {
-        const el = document.createElement('div');
-        el.className = 'history-item';
-        const display = h.unit === 'in' ? (h.dist * 39.3701).toFixed(2) : (h.dist * 100).toFixed(2);
-        const u = h.unit === 'in' ? 'in' : 'cm';
-        el.innerHTML = `<div class="h-dist">${display}<small style="font-size:12px;opacity:0.7"> ${u}</small></div>
-                        <div class="h-meta">${h.time}</div>`;
-        historyList.appendChild(el);
-      });
-    }
-
-    $('clearHistory').addEventListener('click', () => {
-      state.history = [];
-      localStorage.removeItem('reachtrack_history');
-      renderHistory();
-      showToast('History cleared');
-    });
-
     // ========== Modals ==========
     $('infoBtn').addEventListener('click', () => $('infoOverlay').classList.add('open'));
     $('closeInfo').addEventListener('click', () => $('infoOverlay').classList.remove('open'));
@@ -1215,7 +1144,6 @@
         $('unitToggle').querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.unit === state.unit));
         distanceUnit.textContent = unitLabel();
         updateDisplay(Math.hypot(state.position.x, state.position.y), Math.hypot(state.velocity.x, state.velocity.y));
-        renderHistory();
       }
     });
 
@@ -1237,11 +1165,9 @@
     // ========== Init ==========
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
-    renderHistory();
 
     // Prevent pull-to-refresh / bounce
     document.body.addEventListener('touchmove', e => {
-      if (e.target.closest('.history-list')) return;
       e.preventDefault();
     }, { passive: false });
   </script>
