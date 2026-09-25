@@ -65,7 +65,6 @@
         var(--bg);
     }
 
-    /* Header */
     .header {
       padding: calc(16px + var(--safe-top)) 20px 12px;
       display: flex;
@@ -133,7 +132,6 @@
       color: var(--accent);
     }
 
-    /* Main Display */
     .main {
       flex: 1;
       display: flex;
@@ -177,7 +175,6 @@
     .status-pill.ready .status-dot { background: var(--success); box-shadow: 0 0 8px var(--success); }
     .status-pill.tracking .status-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 1.2s infinite; }
     .status-pill.calibrating .status-dot { background: var(--warning); box-shadow: 0 0 8px var(--warning); }
-    .status-pill.error .status-dot { background: var(--danger); }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -215,7 +212,6 @@
       border-radius: 3px;
     }
 
-    /* Distance Hero */
     .distance-hero {
       text-align: center;
       margin: 8px 0 24px;
@@ -241,7 +237,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      transition: transform 0.1s;
     }
 
     .distance-value.tracking {
@@ -297,7 +292,6 @@
       margin-left: 2px;
     }
 
-    /* Canvas Path */
     .path-container {
       flex: 1;
       min-height: 160px;
@@ -328,7 +322,6 @@
       pointer-events: none;
     }
 
-    /* Controls */
     .controls {
       display: grid;
       grid-template-columns: 1fr 1.4fr 1fr;
@@ -349,22 +342,14 @@
       justify-content: center;
       gap: 8px;
       transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      overflow: hidden;
     }
 
-    .btn:active {
-      transform: scale(0.96);
-    }
+    .btn:active { transform: scale(0.96); }
 
     .btn-secondary {
       background: var(--bg-elevated);
       color: var(--text);
       border: 1px solid var(--border-strong);
-    }
-
-    .btn-secondary:active {
-      background: rgba(255,255,255,0.06);
     }
 
     .btn-primary {
@@ -385,7 +370,6 @@
       border: 1px solid rgba(248, 113, 113, 0.25);
     }
 
-    /* Overlay / Modal */
     .overlay {
       position: fixed;
       inset: 0;
@@ -416,9 +400,7 @@
       transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
     }
 
-    .overlay.open .modal {
-      transform: translateY(0);
-    }
+    .overlay.open .modal { transform: translateY(0); }
 
     .modal h2 {
       font-size: 22px;
@@ -455,12 +437,8 @@
       min-width: 24px;
     }
 
-    .modal .btn {
-      width: 100%;
-      margin-top: 8px;
-    }
+    .modal .btn { width: 100%; margin-top: 8px; }
 
-    /* Settings row */
     .settings-row {
       display: flex;
       align-items: center;
@@ -471,10 +449,7 @@
 
     .settings-row:last-of-type { border-bottom: none; }
 
-    .settings-label {
-      font-size: 15px;
-      font-weight: 500;
-    }
+    .settings-label { font-size: 15px; font-weight: 500; }
 
     .segmented {
       display: flex;
@@ -500,7 +475,6 @@
       color: #0a0e17;
     }
 
-    /* Toast */
     .toast {
       position: fixed;
       top: calc(20px + var(--safe-top));
@@ -520,11 +494,8 @@
       text-align: center;
     }
 
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* Permission gate */
     .gate {
       position: fixed;
       inset: 0;
@@ -552,10 +523,7 @@
       box-shadow: 0 0 40px var(--accent-glow);
     }
 
-    .gate-icon svg {
-      width: 48px;
-      height: 48px;
-    }
+    .gate-icon svg { width: 48px; height: 48px; }
 
     .gate h1 {
       font-size: 28px;
@@ -588,7 +556,6 @@
   </style>
 </head>
 <body>
-  <!-- Permission Gate -->
   <div class="gate" id="gate">
     <div class="gate-icon">
       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -608,7 +575,6 @@
     <p class="disclaimer">Place the phone screen-up and level on a low-friction sliding platform. Keep the device flat throughout the movement.</p>
   </div>
 
-  <!-- Header -->
   <header class="header">
     <div class="logo">
       <div class="logo-mark">
@@ -680,7 +646,6 @@
     </div>
   </main>
 
-  <!-- Info Modal -->
   <div class="overlay" id="infoOverlay">
     <div class="modal">
       <h2>How to Use</h2>
@@ -692,12 +657,11 @@
         <li><strong>4</strong> Tap <em>Start</em>, then smoothly push the platform. Distance updates live.</li>
         <li><strong>5</strong> When finished, note the Peak distance, then tap <em>Reset</em> for the next trial.</li>
       </ul>
-      <p style="font-size:13px;color:var(--text-muted);">Note: Inertial tracking has inherent drift. Best results on very short distances (&lt; 1 m) with a smooth surface and steady push. Treat readings as comparative rather than absolute laboratory-grade.</p>
+      <p style="font-size:13px;color:var(--text-muted);">Accuracy is best under ~72 in (183 cm) with a smooth, level surface and a steady push. Always recalibrate between sets.</p>
       <button class="btn btn-primary" id="closeInfo">Got it</button>
     </div>
   </div>
 
-  <!-- Settings Modal -->
   <div class="overlay" id="settingsOverlay">
     <div class="modal">
       <h2>Settings</h2>
@@ -728,23 +692,34 @@
       permission: false,
       calibrated: false,
       tracking: false,
-      unit: 'cm',          // cm | in
-      sensitivity: 'med',  // low | med | high
+      unit: 'cm',
+      sensitivity: 'med',
       position: { x: 0, y: 0 },
       velocity: { x: 0, y: 0 },
       peakDist: 0,
       lastTime: 0,
       path: [],
       gravity: { x: 0, y: 0, z: -1 },
-      levelOk: false
+      levelOk: false,
+      // accuracy helpers
+      prevAx: 0,
+      prevAy: 0,
+      stillCount: 0,
+      bias: { x: 0, y: 0 },
+      runningBias: { x: 0, y: 0 }
     };
 
-    // Sensitivity thresholds (m/s²)
+    // Tuned for 0–72 inch range
     const SENS = {
-      low:  { start: 0.35, stop: 0.12, damp: 0.92 },
-      med:  { start: 0.22, stop: 0.08, damp: 0.88 },
-      high: { start: 0.12, stop: 0.05, damp: 0.82 }
+      low:  { start: 0.28, stop: 0.10, damp: 0.90, zupt: 8 },
+      med:  { start: 0.18, stop: 0.07, damp: 0.86, zupt: 6 },
+      high: { start: 0.11, stop: 0.05, damp: 0.80, zupt: 5 }
     };
+
+    const CALIB_SAMPLES = 70;          // longer calibration
+    const BIAS_ADAPT = 0.012;          // slow continuous bias tracking
+    const LP_ALPHA = 0.28;             // low-pass strength
+    const ROT_REJECT = 25;             // deg/s – ignore samples if rotating this much
 
     // ========== DOM ==========
     const $ = id => document.getElementById(id);
@@ -806,7 +781,6 @@
       const h = canvas.height / (window.devicePixelRatio || 1);
       ctx.clearRect(0, 0, w, h);
 
-      // subtle grid
       ctx.strokeStyle = 'rgba(255,255,255,0.04)';
       ctx.lineWidth = 1;
       const step = 40;
@@ -818,7 +792,6 @@
       }
 
       if (state.path.length < 2) {
-        // origin crosshair
         ctx.strokeStyle = 'rgba(34,211,238,0.35)';
         ctx.lineWidth = 1.5;
         const cx = w / 2, cy = h / 2;
@@ -829,19 +802,17 @@
         return;
       }
 
-      // scale path to fit with margin
       let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
       state.path.forEach(p => {
         minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
         minY = Math.min(minY, p.y); maxY = Math.max(maxY, p.y);
       });
-      const rangeX = Math.max(maxX - minX, 0.05);
-      const rangeY = Math.max(maxY - minY, 0.05);
+      const rangeX = Math.max(maxX - minX, 0.04);
+      const rangeY = Math.max(maxY - minY, 0.04);
       const scale = Math.min((w - 40) / rangeX, (h - 40) / rangeY);
       const offX = (w - rangeX * scale) / 2 - minX * scale;
       const offY = (h - rangeY * scale) / 2 - minY * scale;
 
-      // trail
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(34,211,238,0.7)';
       ctx.lineWidth = 3;
@@ -855,17 +826,17 @@
       });
       ctx.stroke();
 
-      // glow
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(34,211,238,0.25)';
       ctx.lineWidth = 8;
       state.path.forEach((p, i) => {
         const px = p.x * scale + offX;
         const py = p.y * scale + offY;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
       });
       ctx.stroke();
 
-      // start & end dots
       const start = state.path[0];
       const end = state.path[state.path.length - 1];
       ctx.fillStyle = '#34d399';
@@ -878,56 +849,52 @@
       ctx.fill();
     }
 
-    // ========== Motion Processing ==========
-    let bias = { x: 0, y: 0, z: 0 };
+    // ========== Motion Processing (accuracy-focused) ==========
     let sampleCount = 0;
-    const CALIB_SAMPLES = 40;
+    let calibSum = { x: 0, y: 0 };
 
     function processMotion(e) {
       const now = performance.now();
-      const dt = state.lastTime ? Math.min((now - state.lastTime) / 1000, 0.05) : 0.016;
+      const dt = state.lastTime ? Math.min((now - state.lastTime) / 1000, 0.04) : 0.016;
       state.lastTime = now;
 
-      // Prefer linear acceleration (gravity removed)
-      let ax = 0, ay = 0, az = 0;
+      // --- Get linear acceleration ---
+      let ax = 0, ay = 0;
       if (e.acceleration && e.acceleration.x !== null) {
         ax = e.acceleration.x || 0;
         ay = e.acceleration.y || 0;
-        az = e.acceleration.z || 0;
       } else if (e.accelerationIncludingGravity) {
-        // crude gravity removal using running gravity estimate
         const g = e.accelerationIncludingGravity;
         ax = (g.x || 0) - state.gravity.x * 9.81;
         ay = (g.y || 0) - state.gravity.y * 9.81;
-        az = (g.z || 0) - state.gravity.z * 9.81;
       }
 
-      // Update gravity estimate for level check
+      // Update gravity estimate (for level indicator)
       if (e.accelerationIncludingGravity) {
-        const alpha = 0.08;
-        state.gravity.x = state.gravity.x * (1 - alpha) + (e.accelerationIncludingGravity.x || 0) / 9.81 * alpha;
-        state.gravity.y = state.gravity.y * (1 - alpha) + (e.accelerationIncludingGravity.y || 0) / 9.81 * alpha;
-        state.gravity.z = state.gravity.z * (1 - alpha) + (e.accelerationIncludingGravity.z || 0) / 9.81 * alpha;
+        const alphaG = 0.07;
+        state.gravity.x = state.gravity.x * (1 - alphaG) + (e.accelerationIncludingGravity.x || 0) / 9.81 * alphaG;
+        state.gravity.y = state.gravity.y * (1 - alphaG) + (e.accelerationIncludingGravity.y || 0) / 9.81 * alphaG;
+        state.gravity.z = state.gravity.z * (1 - alphaG) + (e.accelerationIncludingGravity.z || 0) / 9.81 * alphaG;
       }
 
-      // Level indicator (how close gravity is to pure -Z)
-      const gMag = Math.sqrt(state.gravity.x ** 2 + state.gravity.y ** 2 + state.gravity.z ** 2) || 1;
-      const tilt = Math.sqrt(state.gravity.x ** 2 + state.gravity.y ** 2) / gMag;
+      // Level indicator
+      const gMag = Math.hypot(state.gravity.x, state.gravity.y, state.gravity.z) || 1;
+      const tilt = Math.hypot(state.gravity.x, state.gravity.y) / gMag;
       const levelPct = Math.max(0, Math.min(100, (1 - tilt * 4) * 100));
       levelFill.style.width = levelPct + '%';
       levelFill.style.background = levelPct > 85 ? 'var(--success)' : levelPct > 60 ? 'var(--warning)' : 'var(--danger)';
       state.levelOk = levelPct > 80;
 
-      // Calibration phase
+      // --- Calibration ---
       if (state.calibrating) {
-        bias.x += ax;
-        bias.y += ay;
-        bias.z += az;
+        calibSum.x += ax;
+        calibSum.y += ay;
         sampleCount++;
         if (sampleCount >= CALIB_SAMPLES) {
-          bias.x /= sampleCount;
-          bias.y /= sampleCount;
-          bias.z /= sampleCount;
+          state.bias.x = calibSum.x / sampleCount;
+          state.bias.y = calibSum.y / sampleCount;
+          state.runningBias.x = state.bias.x;
+          state.runningBias.y = state.bias.y;
           state.calibrating = false;
           state.calibrated = true;
           setStatus('ready', 'Ready');
@@ -940,51 +907,85 @@
 
       if (!state.tracking || !state.calibrated) return;
 
-      // Remove bias
-      ax -= bias.x;
-      ay -= bias.y;
+      // Reject high rotation (phone should stay flat)
+      let rotMag = 0;
+      if (e.rotationRate) {
+        const rx = e.rotationRate.alpha || 0;
+        const ry = e.rotationRate.beta || 0;
+        const rz = e.rotationRate.gamma || 0;
+        rotMag = Math.hypot(rx, ry, rz);
+      }
+      if (rotMag > ROT_REJECT) {
+        // heavily damp velocity instead of integrating bad data
+        state.velocity.x *= 0.7;
+        state.velocity.y *= 0.7;
+        updateDisplay(Math.hypot(state.position.x, state.position.y), Math.hypot(state.velocity.x, state.velocity.y));
+        return;
+      }
 
-      // Simple low-pass
-      const lp = 0.35;
-      state._fax = (state._fax || 0) * (1 - lp) + ax * lp;
-      state._fay = (state._fay || 0) * (1 - lp) + ay * lp;
+      // Remove bias
+      ax -= state.runningBias.x;
+      ay -= state.runningBias.y;
+
+      // Low-pass filter
+      state._fax = (state._fax || 0) * (1 - LP_ALPHA) + ax * LP_ALPHA;
+      state._fay = (state._fay || 0) * (1 - LP_ALPHA) + ay * LP_ALPHA;
       ax = state._fax;
       ay = state._fay;
 
-      const mag = Math.sqrt(ax * ax + ay * ay);
+      const mag = Math.hypot(ax, ay);
       const s = SENS[state.sensitivity];
 
-      // Integrate
-      if (mag > s.start * 0.5) {
-        state.velocity.x += ax * dt;
-        state.velocity.y += ay * dt;
+      // Continuous slow bias adaptation when nearly still
+      if (mag < s.stop * 1.4) {
+        state.runningBias.x = state.runningBias.x * (1 - BIAS_ADAPT) + (ax + state.runningBias.x) * BIAS_ADAPT;
+        state.runningBias.y = state.runningBias.y * (1 - BIAS_ADAPT) + (ay + state.runningBias.y) * BIAS_ADAPT;
       }
 
-      // Damping when nearly still
+      // Zero-Velocity Update (ZUPT)
       if (mag < s.stop) {
-        state.velocity.x *= s.damp;
-        state.velocity.y *= s.damp;
-        if (Math.abs(state.velocity.x) < 0.008) state.velocity.x = 0;
-        if (Math.abs(state.velocity.y) < 0.008) state.velocity.y = 0;
+        state.stillCount++;
+        if (state.stillCount >= s.zupt) {
+          state.velocity.x = 0;
+          state.velocity.y = 0;
+        } else {
+          state.velocity.x *= s.damp;
+          state.velocity.y *= s.damp;
+        }
+      } else {
+        state.stillCount = 0;
       }
+
+      // Trapezoidal integration (more accurate than Euler)
+      if (mag > s.start * 0.45) {
+        const avgAx = (state.prevAx + ax) * 0.5;
+        const avgAy = (state.prevAy + ay) * 0.5;
+        state.velocity.x += avgAx * dt;
+        state.velocity.y += avgAy * dt;
+      }
+
+      // Soft velocity clamp for residual noise
+      if (Math.abs(state.velocity.x) < 0.006) state.velocity.x = 0;
+      if (Math.abs(state.velocity.y) < 0.006) state.velocity.y = 0;
 
       state.position.x += state.velocity.x * dt;
       state.position.y += state.velocity.y * dt;
 
-      // Path (downsample a bit)
-      if (!state.path.length || 
+      state.prevAx = ax;
+      state.prevAy = ay;
+
+      // Path sampling
+      if (!state.path.length ||
           Math.hypot(state.position.x - state.path[state.path.length-1].x,
-                     state.position.y - state.path[state.path.length-1].y) > 0.004) {
+                     state.position.y - state.path[state.path.length-1].y) > 0.0035) {
         state.path.push({ x: state.position.x, y: state.position.y });
-        if (state.path.length > 400) state.path.shift();
+        if (state.path.length > 500) state.path.shift();
       }
 
       const dist = Math.hypot(state.position.x, state.position.y);
       const speed = Math.hypot(state.velocity.x, state.velocity.y);
-
       if (dist > state.peakDist) state.peakDist = dist;
 
-      // UI update (throttled via rAF)
       updateDisplay(dist, speed);
     }
 
@@ -998,8 +999,7 @@
         peakValue.innerHTML = toDisplay(state.peakDist) + '<small>' + unitLabel() + '</small>';
         speedValue.innerHTML = speed.toFixed(2) + '<small>m/s</small>';
 
-        // Direction (cardinal-ish from displacement)
-        if (dist > 0.01) {
+        if (dist > 0.008) {
           const ang = Math.atan2(state.position.y, state.position.x) * 180 / Math.PI;
           const dirs = ['E', 'NE', 'N', 'NW', 'W', 'SW', 'S', 'SE'];
           const idx = Math.round(((ang % 360) + 360) % 360 / 45) % 8;
@@ -1019,18 +1019,11 @@
           typeof DeviceMotionEvent.requestPermission === 'function') {
         DeviceMotionEvent.requestPermission()
           .then(permState => {
-            if (permState === 'granted') {
-              startListening();
-            } else {
-              showToast('Motion permission denied');
-            }
+            if (permState === 'granted') startListening();
+            else showToast('Motion permission denied');
           })
-          .catch(err => {
-            console.error(err);
-            showToast('Permission error – try Safari');
-          });
+          .catch(() => showToast('Permission error – try Safari'));
       } else {
-        // non-iOS or older
         startListening();
       }
     }
@@ -1041,7 +1034,6 @@
       gate.classList.add('hidden');
       setStatus('', 'Standby');
       showToast('Sensors enabled');
-      // try wake lock
       if ('wakeLock' in navigator) {
         navigator.wakeLock.request('screen').catch(() => {});
       }
@@ -1054,7 +1046,7 @@
         showToast('Enable sensors first');
         return;
       }
-      bias = { x: 0, y: 0, z: 0 };
+      calibSum = { x: 0, y: 0 };
       sampleCount = 0;
       state.calibrating = true;
       state.calibrated = false;
@@ -1071,7 +1063,6 @@
       if (state.tracking) {
         stopTracking();
       } else {
-        // reset kinematics but keep calibration
         state.position = { x: 0, y: 0 };
         state.velocity = { x: 0, y: 0 };
         state.peakDist = 0;
@@ -1079,6 +1070,9 @@
         state.lastTime = 0;
         state._fax = 0;
         state._fay = 0;
+        state.prevAx = 0;
+        state.prevAy = 0;
+        state.stillCount = 0;
         state.tracking = true;
         trackBtn.textContent = 'Stop';
         setStatus('tracking', 'Tracking');
@@ -1094,8 +1088,7 @@
       setStatus('ready', 'Ready');
       distanceValue.classList.remove('tracking');
       haptic(20);
-
-      if (state.peakDist > 0.005) {
+      if (state.peakDist > 0.004) {
         showToast('Stopped · ' + toDisplay(state.peakDist) + ' ' + unitLabel());
       }
     }
@@ -1106,6 +1099,7 @@
       state.peakDist = 0;
       state.path = [];
       state.tracking = false;
+      state.stillCount = 0;
       trackBtn.textContent = 'Start';
       if (state.calibrated) setStatus('ready', 'Ready');
       else setStatus('', 'Standby');
@@ -1121,7 +1115,6 @@
     $('settingsBtn').addEventListener('click', () => $('settingsOverlay').classList.add('open'));
     $('closeSettings').addEventListener('click', () => $('settingsOverlay').classList.remove('open'));
 
-    // unit toggle
     $('unitToggle').addEventListener('click', e => {
       if (e.target.dataset.unit) {
         state.unit = e.target.dataset.unit;
@@ -1131,7 +1124,6 @@
       }
     });
 
-    // sensitivity
     $('sensToggle').addEventListener('click', e => {
       if (e.target.dataset.sens) {
         state.sensitivity = e.target.dataset.sens;
@@ -1139,7 +1131,6 @@
       }
     });
 
-    // close modals on backdrop
     document.querySelectorAll('.overlay').forEach(ov => {
       ov.addEventListener('click', e => {
         if (e.target === ov) ov.classList.remove('open');
@@ -1150,7 +1141,6 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Prevent pull-to-refresh / bounce
     document.body.addEventListener('touchmove', e => {
       e.preventDefault();
     }, { passive: false });
